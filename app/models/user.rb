@@ -9,6 +9,9 @@ class User < ApplicationRecord
   # Authority
   include Authority::UserAbilities
 
+  has_many :trainings, as: :trainer
+  has_many :trainings, as: :trainee
+
 
   ## role - guest / owner / admin
   DEFAULT_ROLE = :guest

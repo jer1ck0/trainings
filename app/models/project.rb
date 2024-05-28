@@ -16,4 +16,8 @@ class Project < ApplicationRecord
   # audit
   audited
 
+  def self.ransackable_attributes(auth_object = nil)
+    ["keyname_cont", "audits", "posts", "roles"]
+  end
+
 end
