@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root to: "projects#index"
+  root to: "trainings#index"
 
   devise_for :users, skip: [ :sessions ]
   devise_scope :user do
@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     get 'logout' => 'sessions#destroy', :as => :destory_user_session
   end
 
+  resources :trainings 
   resources :projects do |project|
     get :permission_policy
 

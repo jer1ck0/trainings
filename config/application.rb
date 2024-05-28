@@ -11,7 +11,8 @@ module TemplateRailsAuth
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
-    # config.time_zone = "Seoul"
+    # config.time_zone = "Seoul
+    config.load_defaults 7.0
     config.to_prepare do
       # Configure single controller layout
       Devise::SessionsController.layout "login"
