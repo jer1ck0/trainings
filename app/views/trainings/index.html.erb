@@ -29,10 +29,10 @@
     <% @trainings.each do |trn| %>
     <% training = TrainingPresenter.new trn %>
       <tr>
-        <td><%= training.id%></td>
+        <td><%= link_to training.id, edit_training_path(training)%></td>
         <td><%= training.created_at%></td>
-        <td><%= training.created_at%></td>
-        <td><%= training.created_at%></td>
+        <td><%= training.comment%></td>
+        <td><%= link_to 'Перейти', edit_training_path(training)%></td>
       </tr>
     <% end %>
   </tbody>
@@ -40,5 +40,5 @@
 <!--END index . the list-->
 <br>
 
-<%= link_to 'New training', new_training_path %>
+<%= link_to 'Новая тренировка', new_training_path %>
 

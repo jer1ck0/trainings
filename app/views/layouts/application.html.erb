@@ -5,6 +5,7 @@
     <%= render 'layouts/meta' %>
     <%= render 'layouts/rails_default' %>
     <%= render 'layouts/shim' %>
+    <%= hotwire_livereload_tags if Rails.env.development? %>
   </head>
 
   <body>

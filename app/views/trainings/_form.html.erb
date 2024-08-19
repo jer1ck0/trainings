@@ -1,27 +1,12 @@
 <%= form_for(training) do |tr| %>
-
   <div class="row">
     <div class="col-md-6">
       <fieldset>
         <h3>Оставьте комментарий к тренировке <strong>*</strong></h3>
-        <%= tr.text_field :comment, class: 'form-control', autofocus: true, autocomplete: 'off', placeholder: 'android' %>
-      </fieldset>
-    </div>
-  </div>
-
-  <% if training.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(training.errors.count, "error") %> prohibited this training from being saved:</h2>
-
-      <ul>
-      <% training.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="actions">
-    <%= tr.submit %>
-  </div>
+        <%= tr.text_field :comment, class: 'form-control', autofocus: true, autocomplete: 'off', placeholder: 'Поделитесь впечатлениями как прошла ваша тренировка' %><%= tr.submit %>
 <% end %>
+      </fieldset>
+      <%= render 'current_workout_sets', workout_sets: training.workout_sets %>
+      <%= render partial: "workout_sets/form", locals: {workout_set: @workout_set = WorkoutSet.new, training_id: training.id} %>
+    </div>
+  </div>
