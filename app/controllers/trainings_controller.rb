@@ -4,7 +4,11 @@ class TrainingsController < ApplicationController
   before_action :set_training_permission, only: [:permission_policy, :permission]
 
   def index
-    @trainings = Training.all.paginate(page: params[:page], per_page:10) # paging
+    @trainings = if current_user.has_role_admin?
+      Training.all.paginate(page: params[:page], per_page:10) # paging
+    else
+      Training.for_current_user(current_user).paginate(page: params[:page], per_page:10)
+    end
   end
 
   def show
@@ -15,6 +19,7 @@ class TrainingsController < ApplicationController
   end
 
   def edit
+    @workout_set = @training.workout_sets.new
   end
 
   def create
@@ -26,7 +31,7 @@ class TrainingsController < ApplicationController
         # add owner
         current_user.add_role(:owner, @training)
 
-        format.html { redirect_to @training, notice: 'Training was successfully created.' }
+        format.html { redirect_to @training, notice: 'Тренировка успешно начата' }
         format.json { render :show, status: :created, location: @training }
       else
         format.html { render :new }
@@ -40,7 +45,7 @@ class TrainingsController < ApplicationController
   def update
     respond_to do |format|
       if @training.update(training_params)
-        format.html { redirect_to @training, notice: 'Training was successfully updated.' }
+        format.html { redirect_to edit_training_path(@training), notice: 'Training was successfully updated.' }
         format.json { render :show, status: :ok, location: @training }
       else
         format.html { render :edit }
@@ -110,7 +115,7 @@ class TrainingsController < ApplicationController
     end
 
     def training_params
-      params.require(:training).permit(:ptype, :keyname)
+      params.require(:training).permit(:comment, workout_sets_attributes: [:sets, :reps, :exersize_id])
     end
 
     def permission_params

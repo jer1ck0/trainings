@@ -9,7 +9,11 @@ Rails.application.routes.draw do
     get 'logout' => 'sessions#destroy', :as => :destory_user_session
   end
 
-  resources :trainings 
+  resources :trainings do 
+    resources :workout_sets 
+  end
+  resources :workout_sets 
+
   resources :projects do |project|
     get :permission_policy
 

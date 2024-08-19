@@ -1,0 +1,7 @@
+<%= form_for @workout_set, :controller => :workout_set, :action => 'create', :method => :post, :id => 'workout-set-form', :remote => true do |ws| %>
+  <%= ws.number_field :sets, placeholder: "Вес" %><br>
+  <%= ws.number_field :reps, placeholder: "Повторы" %><br>
+  <%= ws.number_field :exersize_id, placeholder: "Упражнение" %><br>
+  <%= ws.hidden_field :training_id, value: training_id %><br>
+  <%= ws.submit "Добавить" %><br>
+<% end %>

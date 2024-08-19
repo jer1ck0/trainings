@@ -1,0 +1,9 @@
+<% if workout_sets.any? %>
+  <div id="workout-sets">
+    <ul>
+      <% workout_sets.each do |workout_set| %>
+        <li><%= workout_set.inspect %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
