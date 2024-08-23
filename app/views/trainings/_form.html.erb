@@ -1,12 +1,9 @@
 <%= form_for(training) do |tr| %>
-  <div class="row">
-    <div class="col-md-6">
-      <fieldset>
-        <h3>Оставьте комментарий к тренировке <strong>*</strong></h3>
-        <%= tr.text_field :comment, class: 'form-control', autofocus: true, autocomplete: 'off', placeholder: 'Поделитесь впечатлениями как прошла ваша тренировка' %><%= tr.submit %>
+    <%= tr.label 'Комментарий', class: 'block text-lg mb-2'  %>
+    <%= tr.text_field :comment, class: 'w-full p-2 rounded-md border border-neutral-300', autofocus: true, autocomplete: 'off', placeholder: 'Поделитесь впечатлениями как прошла ваша тренировка' %>
+    <%= tr.submit %>
 <% end %>
-      </fieldset>
-      <%= render 'current_workout_sets', workout_sets: training.workout_sets %>
-      <%= render partial: "workout_sets/form", locals: {workout_set: @workout_set = WorkoutSet.new, training_id: training.id} %>
-    </div>
-  </div>
+<br>
+<%= render 'current_workout_sets', workout_sets: training.workout_sets %>
+<%= render partial: "workout_sets/form", locals: {workout_set: @workout_set = WorkoutSet.new, training_id: training.id} %>
+
