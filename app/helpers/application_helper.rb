@@ -1,5 +1,17 @@
 module ApplicationHelper
 
+  def title_for(element)
+    if element.is_a?(Training)
+      return link_to "Тренировка #{element.id}", edit_training_path(element)
+    end
+  end
+
+  def info_about(element)
+    if element.is_a?(Training)
+      return link_to "Тренировка #{element.id}", edit_training_path(element)
+    end
+  end
+
   def full_title(page_title = '')
     base_title = "Torres"
     if page_title.empty?
