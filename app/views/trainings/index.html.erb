@@ -1,44 +1,10 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Тренировки</h1>
-
-<div class="pull-right">
-  <%= link_to "Новая тренировка", new_training_path %>
-</div>
-
-
-<!--index . the list-->
-<table class="table training-index-table">
-  <colgroup>
-    <col width="10%" style="background: #fafafa" />
-    <col width="30%" />
-    <col width="30%" />
-    <col width="30%" />
-  </colgroup>
-  <thead>
-  <tr>
-    <th>(#id)</th>
-    <th class="center">Создана</th>
-    <th class="center">Комментарий</th>
-    <th class="center">Действия</th>
-  </tr>
-  </thead>
-
-  <tbody>
-    <%  %>
-    <% @trainings.each do |trn| %>
-    <% training = TrainingPresenter.new trn %>
-      <tr>
-        <td><%= link_to training.id, edit_training_path(training)%></td>
-        <td><%= training.created_at%></td>
-        <td><%= training.comment%></td>
-        <td><%= link_to 'Перейти', edit_training_path(training)%></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-<!--END index . the list-->
+<ul class="space-y-2">
+  <% @trainings.each do |training| %>
+    <%= render partial: 'components/element', locals: { element: training } %>
+  <% end %>
+</ul>
 <br>
-
-<%= link_to 'Новая тренировка', new_training_path %>
+<%= button_to 'Начать новую тренировку', new_training_path, class: 'bg-primary text-neutral-50 rounded-md py-2 w-full', method: 'get' %>
 

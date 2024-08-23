@@ -1,7 +1,31 @@
-<%= form_for @workout_set, :controller => :workout_set, :action => 'create', :method => :post, :id => 'workout-set-form', :remote => true do |ws| %>
-  <%= ws.number_field :sets, placeholder: "Вес" %><br>
-  <%= ws.number_field :reps, placeholder: "Повторы" %><br>
-  <%= ws.number_field :exersize_id, placeholder: "Упражнение" %><br>
+<section>
+  <h2 class="text-xl font-title mb-2">Добавить новый подход</h2>
+  <%= form_for @workout_set, :controller => :workout_set,
+                            :action => 'create',
+                            :method => :post,
+                            :id => 'workout-set-form',
+                            :class => 'bg-neutral-50 p-4 rounded-md shadow space-y-4',
+                            :remote => true do |ws| %>
   <%= ws.hidden_field :training_id, value: training_id %><br>
-  <%= ws.submit "Добавить" %><br>
+  <div>
+    <%= ws.label "Вес", class: "block text-lg mb-2" %>
+    <%= ws.number_field :sets, class: "w-full p-2 rounded-md border border-neutral-300"%><br>
+  </div>
+  
+  <div>
+    <%= ws.label "Повторы", class: "block text-lg mb-2" %>
+    <%= ws.number_field :reps, class: "w-full p-2 rounded-md border border-neutral-300"%><br>
+  </div>
+  
+  <div>
+    <label for="exercise" class="block text-lg mb-2">Exercise</label>
+    <select id="exercise" class="w-full p-2 rounded-md border border-neutral-300">
+      <option value="">Select an exercise</option>
+      <option value="exercise1">Exercise 1</option>
+      <option value="exercise2">Exercise 2</option>
+      <option value="exercise3">Exercise 3</option> 
+    </select>
+  </div>  
+  <button type="submit" class="bg-primary text-neutral-50 rounded-md py-2 w-full">Начать тренировку</button>
 <% end %>
+</section>
