@@ -15,7 +15,7 @@ module TemplateRailsAuth
     config.load_defaults 7.0
     config.to_prepare do
       # Configure single controller layout
-      Devise::SessionsController.layout "login"
+      # Devise::SessionsController.layout "login"
     end
 
     # config.datafile = config_for(:datafile)
