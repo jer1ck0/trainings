@@ -19,20 +19,14 @@ class TrainingsController < ApplicationController
   end
 
   def edit
-    @workout_set = @training.workout_sets.new
   end
 
   def create
-    @training = Training.new(training_params)
-
+    @training = Training.new(trainee_id: current_user.id, trainer_id: current_user.id)
     respond_to do |format|
       if @training.save
-
-        # add owner
-        current_user.add_role(:owner, @training)
-
-        format.html { redirect_to @training, notice: 'Тренировка успешно начата' }
-        format.json { render :show, status: :created, location: @training }
+        format.html { redirect_to edit_training_path(@training.id), notice: 'Тренировка успешно начата' }
+        format.json { render :edit, status: :created, location: @training }
       else
         format.html { render :new }
         format.json { render json: @training.errors, status: :unprocessable_entity }
