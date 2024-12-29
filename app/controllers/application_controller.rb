@@ -23,4 +23,10 @@ class ApplicationController < ActionController::Base
     Authority.logger.warn(error.message)
     redirect_to request.referrer.presence || root_path, :danger => t('not_auth')
   end
+
+  def search
+    @results = Exersize.where('name LIKE ?', "%#{params[:exersize]}%")
+    p @results
+    render partial: 'components/search_results', locals: { results: @results }
+  end
 end

@@ -1,0 +1,7 @@
+<% if results.present? %>
+  <ul id="results-list">
+    <% results.each do |result| %>
+      <li><%= result.name %></li>
+    <% end %>
+  </ul>
+<% end %>
