@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   root to: "trainings#index"
+  get 'search', action: :search, controller: :application
 
   devise_for :users, skip: [ :sessions ]
   devise_scope :user do

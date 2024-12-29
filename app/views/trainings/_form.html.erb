@@ -1,6 +1,6 @@
 <%= form_for(training) do |tr| %>
-    <%= tr.label 'Комментарий', class: 'block text-lg mb-2'  %>
-    <%= tr.text_field :comment, class: 'w-full p-2 rounded-md border border-neutral-300', autofocus: true, autocomplete: 'off', placeholder: 'Поделитесь впечатлениями как прошла ваша тренировка' %>
+    <%= tr.label 'Комментарий', class: ''  %>
+    <%= tr.text_field :comment, class: '', autofocus: true, autocomplete: 'off', placeholder: 'Поделитесь впечатлениями как прошла ваша тренировка' %>
     <%= tr.submit %>
 <% end %>
 <br>

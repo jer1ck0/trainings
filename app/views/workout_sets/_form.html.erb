@@ -18,14 +18,26 @@
   </div>
   
   <div>
+      <button type="submit" class="bg-primary text-neutral-50 rounded-md py-2 w-full">Начать тренировку</button>
+<% end %>
+    <%# <%= ws.collection_select(:exersize, :body_part, %w[ rap rock country 0], {}) %> 
+
     <label for="exercise" class="block text-lg mb-2">Exercise</label>
-    <select id="exercise" class="w-full p-2 rounded-md border border-neutral-300">
-      <option value="">Select an exercise</option>
+    <select id="exercise" class="">
       <option value="exercise1">Exercise 1</option>
       <option value="exercise2">Exercise 2</option>
       <option value="exercise3">Exercise 3</option> 
     </select>
-  </div>  
-  <button type="submit" class="bg-primary text-neutral-50 rounded-md py-2 w-full">Начать тренировку</button>
-<% end %>
+  <div id="select-menu">
+    <%= form_tag('/search', method: 'get', :id => 'get_exersize' ) do %>
+      <%= label_tag(:type) %>
+      <%= select_tag(:type, options_for_select(Exersize::TYPE )) %>
+      <%= label_tag(:body_part) %>
+      <%= select_tag(:body_part, options_for_select(Exersize::BODY_PART )) %>
+      <%= label_tag(:support_type) %>
+      <%= select_tag(:support_type, options_for_select(Exersize::SUPPORT_TYPE )) %>
+      <%= text_field_tag(:search1, params[:search]) %>
+    <% end %>
+    <ul id="results-list"></ul>
+  </div>
 </section>

@@ -11,7 +11,28 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery_ujs
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require_tree .
+//= require rails-ujs
+
+$(document).on('turbolinks:load', function() {
+    $('#search').on('input', function() {
+      var searchTerm = $(this).val();
+      if (searchTerm.length > 0) {
+        $.ajax({
+          url: '/search',
+          method: 'GET',
+          data: {
+            exersize: searchTerm
+          },
+          success: function(data) {
+            $('#results-list').html(data);
+          }
+        });
+      } else {
+        $('#results-list').empty();
+      }
+    });
+  });
+  
