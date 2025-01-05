@@ -1,18 +1,19 @@
 class Api::V1::SessionsController < ApplicationController
-  skip_before_action :verify_authenticity_token
-
   def create
-    user = login(params[:email], params[:password])
+    user = login(permitted_params[:email], permitted_params[:password])
 
     if user
-      render json: { message: 'Login successful', token: user.authentication_token }, status: :ok
+      token = JWT.encode({ username: user.username }, ENV['SECRET_KEY_BASE'], 'HS256')
+      render json: { user: user.username, token: token }, status: :ok
     else
-      render json: { errors:v1 ['Invalid email or password'] }, status: :unauthorized
+      render json: { errors: ['Invalid email or password'] }, status: :unauthorized
     end
   end
 
-  def destroy
-    logout
-    head :no_content
+  private
+  def form_authenticity_token; end
+
+  def permitted_params
+    params.required(:session).permit(:email, :password)
   end
 end

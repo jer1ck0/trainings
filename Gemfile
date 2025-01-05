@@ -8,7 +8,7 @@ end
 ##################################################################
 ### Auth & Role
 gem 'sorcery'
-
+gem 'jwt'
 ### Audited
 gem "audited"
 
