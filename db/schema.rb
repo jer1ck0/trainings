@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_01_05_123719) do
+ActiveRecord::Schema[7.2].define(version: 2025_01_05_200604) do
   create_table "posts", force: :cascade do |t|
     t.string "keyname", default: "", null: false
     t.string "description", default: "", null: false
@@ -26,6 +26,14 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_05_123719) do
     t.string "ptype", default: "", null: false
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
+  end
+
+  create_table "trainings", force: :cascade do |t|
+    t.string "description"
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_trainings_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
