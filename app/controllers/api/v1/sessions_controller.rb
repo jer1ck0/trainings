@@ -4,7 +4,7 @@ class Api::V1::SessionsController < ApplicationController
 
     if user
       token = JWT.encode({ username: user.username }, ENV['SECRET_KEY_BASE'], 'HS256')
-      render json: { user: user.username, token: token }, status: :ok
+      render json: { user: user, token: token }, status: :ok
     else
       render json: { errors: ['Invalid email or password'] }, status: :unauthorized
     end

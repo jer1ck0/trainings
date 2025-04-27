@@ -56,6 +56,8 @@ gem 'redis', '~> 5.0'
 # gem 'capistrano-rails', group: :development
 gem 'rack-cors'
 gem 'jwt'
+gem 'dotenv-rails'
+gem 'active_model_serializers'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -6,13 +6,13 @@ module Api
       def index
         trainings = Training.for_user current_user
 
-        render json: { trainings: trainings }, status: :ok
+        render json: { trainings: trainings.map{ |training| ::Api::V1::TrainingSerializer.new(training) } }, status: :ok
       end
 
       def create
         training = Training.new(user_id: current_user.id)
         if training.save
-          render json: { training: training }, status: :created
+          render json: { training: ::Api::V1::TrainingSerializer.new(training) }, status: :created
         end
       end
 
@@ -20,7 +20,7 @@ module Api
         training = Training.for_user(current_user).find(params[:id])
 
         if training
-          render json: { training: training }, status: :ok
+          render json: { training: ::Api::V1::TrainingSerializer.new(training) }, status: :ok
         end
       end
 
@@ -28,7 +28,7 @@ module Api
         training = Training.for_user(current_user).find(params[:id])
 
         if training.update(training_params)
-          render json: { training: training }, status: :ok
+          render json: { training: ::Api::V1::TrainingSerializer.new(training) }, status: :ok
         end
       end
 

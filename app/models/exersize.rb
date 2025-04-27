@@ -1,5 +1,6 @@
 class Exersize < ApplicationRecord
-  BODY_PART = [:legs, :arms, :body, :back, :chest, :abs].freeze
-  TYPE = [:pull, :push, :static].freeze
-  SUPPORT_TYPE = [:machine, :free_weight, :self_weight].freeze
+  BODY_PARTS = %i(back chest legs hands cardio base abdominal common)
+
+  scope :for_body_part, ->(body_part) { where(body_part: body_part) }
+
 end

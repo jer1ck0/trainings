@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_01_05_200604) do
+ActiveRecord::Schema[7.2].define(version: 2025_01_11_190416) do
+  create_table "exersizes", force: :cascade do |t|
+    t.string "comment"
+    t.boolean "countable", default: true
+    t.string "body_part", null: false
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "name"
+    t.index ["user_id"], name: "index_exersizes_on_user_id"
+  end
+
   create_table "posts", force: :cascade do |t|
     t.string "keyname", default: "", null: false
     t.string "description", default: "", null: false
@@ -45,6 +56,18 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_05_200604) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
+  end
+
+  create_table "workout_sets", force: :cascade do |t|
+    t.string "comment"
+    t.integer "training_id", null: false
+    t.integer "exersize_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "sets"
+    t.integer "reps"
+    t.index ["exersize_id"], name: "index_workout_sets_on_exersize_id"
+    t.index ["training_id"], name: "index_workout_sets_on_training_id"
   end
 
   add_foreign_key "posts", "projects"
