@@ -22,8 +22,6 @@ class WorkoutSetsController < ApplicationController
 
     respond_to do |format|
       if @workout_set.save
-        format.js
-        # format.html { redirect_to @workout_set, notice: 'Упражнение добавлено' }
         format.json { render :show, status: :created, location: @workout_set }
       else
         format.html { render :new }

@@ -1,3 +1,3 @@
 class Api::V1::ExersizeSerializer < ActiveModel::Serializer
-  attributes :id, :name, :comment, :countable, :body_part
+  attributes :id, :name, :comment, :countable, :body_part_id
 end

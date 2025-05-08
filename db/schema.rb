@@ -10,33 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_01_11_190416) do
+ActiveRecord::Schema[7.2].define(version: 2025_05_08_181329) do
+  create_table "body_parts", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "slug", null: false
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "exersizes", force: :cascade do |t|
     t.string "comment"
     t.boolean "countable", default: true
-    t.string "body_part", null: false
+    t.integer "body_part_id"
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
+    t.index ["body_part_id"], name: "index_exersizes_on_body_part_id"
     t.index ["user_id"], name: "index_exersizes_on_user_id"
-  end
-
-  create_table "posts", force: :cascade do |t|
-    t.string "keyname", default: "", null: false
-    t.string "description", default: "", null: false
-    t.integer "project_id"
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
-    t.index ["keyname"], name: "index_posts_on_keyname", unique: true
-    t.index ["project_id"], name: "index_posts_on_project_id"
-  end
-
-  create_table "projects", force: :cascade do |t|
-    t.string "keyname", default: "", null: false
-    t.string "ptype", default: "", null: false
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "trainings", force: :cascade do |t|
@@ -62,13 +54,11 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_11_190416) do
     t.string "comment"
     t.integer "training_id", null: false
     t.integer "exersize_id", null: false
+    t.integer "sets", null: false
+    t.integer "reps", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "sets"
-    t.integer "reps"
     t.index ["exersize_id"], name: "index_workout_sets_on_exersize_id"
     t.index ["training_id"], name: "index_workout_sets_on_training_id"
   end
-
-  add_foreign_key "posts", "projects"
 end

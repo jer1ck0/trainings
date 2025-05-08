@@ -4,15 +4,11 @@ module Api
       before_action :authenticate_request, only: [:create]
 
       def body_parts
-        enriched_body_parts = Exersize::BODY_PARTS.each_with_object({}) do |body_part, result|
-          result[body_part] = I18n.t("exersizes.body_parts.#{body_part}")
-        end
-
-        render json: enriched_body_parts, status: :ok
+        render json: BodyPart.all, status: :ok
       end
 
       def index
-        exersizes = Exersize.for_body_part(index_params[:body_part])
+        exersizes = Exersize.for_body_part(index_params[:body_part_id])
         if exersizes
           render json: exersizes, status: :ok
         end
@@ -28,11 +24,11 @@ module Api
       private
 
       def index_params
-        params.permit(:body_part)
+        params.permit(:body_part_id)
       end
 
       def create_params
-        params.require(:exersize).permit(:user_id, :name, :comment, :countable, :body_part)
+        params.require(:exersize).permit(:user_id, :name, :comment, :countable, :body_part_id)
       end
     end
   end

@@ -1,6 +1,6 @@
 class Exersize < ApplicationRecord
-  BODY_PARTS = %i(back chest legs hands cardio base abdominal common)
+  belongs_to :body_part
 
-  scope :for_body_part, ->(body_part) { where(body_part: body_part) }
+  scope :for_body_part, ->(body_part_id) { where(body_part_id: body_part_id) }
 
 end
