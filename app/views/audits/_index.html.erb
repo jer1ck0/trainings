@@ -1,0 +1,40 @@
+<% auditable_types = [
+  "Project",
+  "Post"
+] %>
+
+<!-- index. the list of metrics -->
+<table class="table table-condensed table-hover table-striped">
+  <colgroup>
+    <col width="3%" />
+    <col width="17%" />
+    <col width="18%" />
+    <col width="*%" />
+    <col width="14%" />
+  </colgroup>
+  <thead>
+  <tr>
+    <th>#</th>
+    <th>User</th>
+    <th>Action(version) : Resource(id)</th>
+    <th>Details ( field )</th>
+    <th>Time</th>
+  <tr>
+  </thead>
+  <tbody>
+  <% @audits.each do |audit| %>
+    <% if !audit.user_id.nil? %>
+      <tr>
+        <td>#<%= audit.id %></td>
+        <td><%= link_to (audit.user.username.to_s + ' / ' + audit.user.email.to_s), audits_path(:user_id, audit.user_id) %></td>
+        <td><%= audit.action %> (v<%= audit.version %>) : <%= audit.auditable_type %> (id:<%= audit.auditable_id %>)</td>
+        <td class="audit-col">
+          <%= audit.audited_changes %>
+        </td>
+
+        <td><%= audit.created_at.strftime "%Y-%m-%d %H:%M:%S" %></td>
+      </tr>
+    <% end%>
+  <% end %>
+  </tbody>
+</table>

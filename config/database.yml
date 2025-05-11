@@ -1,0 +1,22 @@
+default: &default
+  host: localhost
+  port: 5432
+  adapter: postgresql
+  encoding: unicode
+  username:
+  password:
+  # For details on connection pooling, see rails configuration guide
+  # http://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: fitngrow
+
+test:
+  <<: *default
+  database: The name for your **test** database that you created (probably in PGAdmin?)
+
+production:
+  <<: *default
+  database: fitngrow_production

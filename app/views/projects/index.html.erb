@@ -1,0 +1,122 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Projects</h1>
+
+<div class="pull-right">
+  <%= link_to_if Project.creatable_by?(current_user),
+                 icon('plus', '<strong>Create Post</strong>'),
+                 new_project_path,
+                 class: 'btn btn-primary' do end %>
+</div>
+
+<!-- search & paging -->
+<%= search_form_for @q, url: projects_path, class: 'form-search' do |f| %>
+  <div class="search-container row">
+    <div class="col-md-6">
+      <div class="input-group">
+        <span class="input-group-addon">Keyname contains</span>
+        <%= f.text_field :keyname_cont, {class: 'form-control'} %>
+        <div class="input-group-btn">
+          <%= f.submit "SEARCH", :class => 'btn btn-primary' %>
+        </div>
+      </div>
+    </div>
+    <div class="pagination-box">
+      <%= will_paginate @projects,
+                        :class => 'digg_pagination',
+                        :previous_label => '← Previous',
+                        :next_label => 'More →'
+      %>
+    </div>
+  </div>
+<% end %>
+<!-- END search & paging -->
+
+<!--index . the list-->
+<table class="table project-index-table">
+  <colgroup>
+    <col width="20%" style="background: #fafafa" />
+    <col width="10%" />
+    <col width="10%" />
+    <col width="25%" />
+    <col width="15%" />
+    <col width="15%" />
+
+  </colgroup>
+  <thead>
+  <tr>
+    <th>Keyname (#id)</th>
+    <th class="center">Type</th>
+    <th class="center">Owner</th>
+    <th class="center">Show / Edit / Delete</th>
+    <th class="center">Auth & Role</th>
+    <th class="center">Audit(Modified)</th>
+  </tr>
+  </thead>
+
+  <tbody>
+    <% @projects.each do |proj| %>
+    <% project = ProjectPresenter.new proj %>
+      <tr>
+        <!--keyname info-->
+        <td>
+          <%= link_to project.keyname,
+                      project_posts_path(project),
+                      class: 'project-keyname',
+                      data: { toggle: 'tooltip', placement: 'right' },
+                      title: "Post list 페이지로 이동" %>
+        </td>
+        <td><%= project.ptype%></td>
+
+        <!--Owner-->
+        <td><%= project.owner_fmt%></td>
+        <!--END Owner-->
+
+        <!--Actions-->
+        <td>
+          <%= link_to icon('eye'), project_path(project),
+                      class: 'label label-info',
+                      data: { toggle: 'modal', target: '#modal' }, remote: true%>
+          <%= link_to icon('edit'), edit_project_path(project),
+                      class: 'label label-info'%>
+          <%= link_to icon('trash-o', 'Delete'), project,
+                      class: 'label label-danger',
+                      method: :delete, data: { confirm: t('delete_confirm') }%>
+        </td>
+        <!--END Actions-->
+
+        <!--Authority & Role-->
+        <td>
+          <%= link_to icon('users'), project_permission_policy_path(project),
+                      class: 'label label-success'%>
+        </td>
+        <!--END Authority & Role-->
+
+        <!--Audit(Modified)-->
+        <td class="center actions">
+          <%= link_to project.audit_modified_fmt,
+                      audits_path(:project_id => project.id),
+                      data: { toggle: 'modal', target: '#audits' },
+                      remote: true %>
+        </td>
+        <!--END Audit(Modified)-->
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<!--END index . the list-->
+<br>
+
+<%= link_to 'New Project', new_project_path %>
+
+
+<!-- Modal -->
+<%= render partial: 'shared/modal', locals: {
+  header_style: 'bg-gradient-3'
+} %>
+
+<%= render partial: 'shared/modal', locals: {
+  id: 'audits',
+  header_style: 'bg-gradient-3',
+  width: 'style=width:85%'
+} %>

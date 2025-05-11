@@ -1,0 +1,10 @@
+<p id="notice"><%= notice %></p>
+
+<ul class="space-y-2">
+  <% @trainings.each do |training| %>
+    <%= render partial: 'components/element', locals: { element: training } %>
+  <% end %>
+</ul>
+<br>
+<%= button_to 'Начать новую тренировку', trainings_path, class: 'bg-primary text-neutral-50 rounded-md py-2 w-full', method: 'post' %>
+

@@ -1,0 +1,9 @@
+<%= form_for(training) do |tr| %>
+    <%= tr.label 'Комментарий', class: ''  %>
+    <%= tr.text_field :comment, class: '', autofocus: true, autocomplete: 'off', placeholder: 'Поделитесь впечатлениями как прошла ваша тренировка' %>
+    <%= tr.submit %>
+<% end %>
+<br>
+<%= render 'current_workout_sets', workout_sets: training.workout_sets %>
+<%= render partial: "workout_sets/form", locals: {workout_set: @workout_set = WorkoutSet.new, training_id: training.id} %>
+

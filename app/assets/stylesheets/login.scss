@@ -1,0 +1,63 @@
+.page-login  {
+
+}
+
+.login-inner{
+  padding-top: 10px;
+}
+
+.logo{
+
+  text-align: center;
+
+  h1{
+    font-size: 6.0em;
+    color: #f3f3f3;
+    letter-spacing: 3px;
+    font-weight: 100;
+    margin-top: 100px;
+  }
+  h4{
+    color: #ccc;
+    font-weight: 500;
+  }
+
+}
+
+.login-box{
+  width: 60%;
+  text-align: left;
+  color: #fff;
+  margin-left: auto;
+  margin-right: auto;
+
+  .btn-login{
+    margin-bottom: 10px;
+    background: rgba(0, 0, 0, 0);
+    border: 1px solid #fff;
+  }
+
+  .input-group{
+
+    .input-group-addon{
+      width: 36px;
+      background-color: #fff;
+    }
+  }
+  .actions-other{
+    color: #1f1f1f;
+  }
+
+  .landing-image {
+    width: 50%;
+    display: block;
+    margin: 0 auto;
+    margin-top: 30px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-top: 5px solid #95888c;
+    border-left: 5px solid #95888c;
+    border-right: 5px solid #95888c;
+    box-shadow: 0px 0px 9px 0px #888888;
+  }
+}

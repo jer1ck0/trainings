@@ -1,0 +1,16 @@
+<% if workout_sets.any? %>
+  <div id="workout-sets">
+    <section class="mb-4">
+      <h2 class="text-xl font-title mb-2">Подходы</h2>
+      <ul class="space-y-2">
+        <% workout_sets.each_with_index do |workout_set, index| %>
+          <li class="p-4 bg-neutral-50 rounded-md shadow">
+            <h3 class="text-lg"> Подход <%= index + 1 %> </h3>
+            <p>Details about workout set 1</p>
+            <%= workout_set.inspect %>
+          </li>
+        <% end %>
+      </ul>
+    </section>
+  </div>
+<% end %>
