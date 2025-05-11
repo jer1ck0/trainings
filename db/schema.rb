@@ -11,6 +11,9 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.2].define(version: 2025_05_08_181329) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "body_parts", force: :cascade do |t|
     t.string "name", null: false
     t.string "slug", null: false
@@ -22,8 +25,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_05_08_181329) do
   create_table "exersizes", force: :cascade do |t|
     t.string "comment"
     t.boolean "countable", default: true
-    t.integer "body_part_id"
-    t.integer "user_id"
+    t.bigint "body_part_id"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
@@ -33,7 +36,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_05_08_181329) do
 
   create_table "trainings", force: :cascade do |t|
     t.string "description"
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_trainings_on_user_id"
@@ -52,8 +55,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_05_08_181329) do
 
   create_table "workout_sets", force: :cascade do |t|
     t.string "comment"
-    t.integer "training_id", null: false
-    t.integer "exersize_id", null: false
+    t.bigint "training_id", null: false
+    t.bigint "exersize_id", null: false
     t.integer "sets", null: false
     t.integer "reps", null: false
     t.datetime "created_at", null: false
